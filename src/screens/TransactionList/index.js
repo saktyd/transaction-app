@@ -1,13 +1,22 @@
-import React from 'react';
-import {View, Text, TouchableOpacity} from 'react-native';
-import {MainContainer} from '../../components';
+import React, {useState} from 'react';
+import {View} from 'react-native';
+import {MainContainer, TransactionSearch} from '../../components';
 
 export default ({navigation}) => {
+  const [inputValue, setInputValue] = useState('');
+  const [pickerValue, setPickerValue] = useState('URUTKAN');
   return (
     <MainContainer>
-      <TouchableOpacity onPress={() => navigation.navigate('Detail')}>
-        <Text>Transaction List</Text>
-      </TouchableOpacity>
+      <View style={{padding: 7}}>
+        <TransactionSearch
+          {...{
+            inputValue,
+            setInputValue,
+            pickerValue,
+            setPickerValue,
+          }}
+        />
+      </View>
     </MainContainer>
   );
 };
