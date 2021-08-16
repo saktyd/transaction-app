@@ -15,6 +15,5 @@ export default StyleSheet.create({
   cardContainer: {
     backgroundColor: 'white',
     borderRadius: 5,
-    width: '100%',
   },
 });

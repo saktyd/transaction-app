@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
     ...gbStyle.cardContainer,
     ...gbStyle.rowYCenter,
     paddingVertical: 15,
-    paddingLeft: 10,
+    paddingLeft: 7,
     paddingRight: 15,
   },
   input: {

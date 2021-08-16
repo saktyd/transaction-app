@@ -3,9 +3,9 @@ import {StatusBar, StyleSheet} from 'react-native';
 import {COLORS} from '../../../constant';
 import {SafeAreaView} from 'react-native-safe-area-context';
 
-export default ({children}) => {
+export default ({children, style}) => {
   return (
-    <SafeAreaView edges={['bottom']} style={styles.container}>
+    <SafeAreaView edges={['bottom']} style={[styles.container, style]}>
       <StatusBar
         backgroundColor={COLORS.primary}
         barStyle="light-content"
