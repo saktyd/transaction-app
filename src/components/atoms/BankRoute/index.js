@@ -5,20 +5,25 @@ import ArrowRightIcon from '../../../assets/icon/right-arrow';
 import {getBankName} from '../../../utils';
 
 // component for label bank route label. Ex: 'BRI => BTPN' / Mandiri => BCA
-export default ({sender_bank, beneficiary_bank}) => {
+export default ({sender_bank, beneficiary_bank, size}) => {
+  const iconProps = {
+    fill: 'black',
+    height: size ? size - 2 : 14, // size default = 14
+    width: size ? size - 2 : 14,
+  };
   return (
     <View style={gbStyles.rowYCenter}>
-      <Text style={styles.text}>{getBankName(sender_bank)}</Text>
+      <Text style={styles.text(size)}>{getBankName(sender_bank)}</Text>
       <View style={{paddingHorizontal: 5}}>
-        <ArrowRightIcon fill={'black'} height={12} width={12} />
+        <ArrowRightIcon {...{...iconProps}} />
       </View>
-      <Text style={styles.text}>{getBankName(beneficiary_bank)}</Text>
+      <Text style={styles.text(size)}>{getBankName(beneficiary_bank)}</Text>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  text: {
-    ...gbStyles.textStyle(16, 'black', 'bold'),
-  },
+  text: size => ({
+    ...gbStyles.textStyle(size || 16, 'black', 'bold'), // size default = 16
+  }),
 });
