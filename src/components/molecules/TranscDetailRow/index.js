@@ -26,12 +26,14 @@ export default ({
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    paddingVertical: 10,
+    paddingVertical: 13,
   },
   textBold: {
     ...gbStyles.textStyle(14, 'black', 'bold'),
+    lineHeight: 20,
   },
   text: {
     ...gbStyles.textStyle(14, 'black'),
+    lineHeight: 20,
   },
 });

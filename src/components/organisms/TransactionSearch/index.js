@@ -66,6 +66,7 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: 5,
     paddingVertical: 0,
+    color: 'black',
   },
   pickerText: {
     ...gbStyle.textStyle(14, COLORS.primary, 'bold'),

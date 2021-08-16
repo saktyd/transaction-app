@@ -10,7 +10,6 @@ const Stack = createStackNavigator();
 
 export default () => {
   const options = {
-    headerTitleAlign: 'center',
     headerTintColor: 'white',
     headerStyle: {
       backgroundColor: COLORS.primary,
@@ -22,17 +21,17 @@ export default () => {
   };
   return (
     <Stack.Navigator
-      initialRouteName={'Transaction List'}
+      initialRouteName={'List Transaksi'}
       screenOptions={{
         cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
         presentation: 'card',
       }}>
       <Stack.Screen
-        name="Transaction List"
+        name="List Transaksi"
         component={TransactionList}
         {...{options}}
       />
-      <Stack.Screen name="Detail" component={Detail} {...{options}} />
+      <Stack.Screen name="Detail Transaksi" component={Detail} {...{options}} />
     </Stack.Navigator>
   );
 };

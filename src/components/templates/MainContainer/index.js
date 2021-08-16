@@ -5,7 +5,7 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 
 export default ({children, style}) => {
   return (
-    <SafeAreaView edges={['bottom']} style={[styles.container, style]}>
+    <SafeAreaView edges={['right', 'left']} style={[styles.container, style]}>
       <StatusBar
         backgroundColor={COLORS.primary}
         barStyle="light-content"

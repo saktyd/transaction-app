@@ -3,7 +3,7 @@ import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import {COLORS, TRS_STATUS} from '../../../constant';
 import gbStyles from '../../../styles';
 import {getDefaultDate, getRupiah} from '../../../utils';
-import {BankRoute, TransactionStatus} from '../../atoms';
+import {BankRoute, Dot, TransactionStatus} from '../../atoms';
 import {useNavigation} from '@react-navigation/core';
 
 export default ({item}) => {
@@ -18,7 +18,7 @@ export default ({item}) => {
   } = item;
 
   const onPress = () => {
-    navigation.navigate('Detail', item);
+    navigation.navigate('Detail Transaksi', item);
   };
 
   return (
@@ -34,11 +34,13 @@ export default ({item}) => {
             </Text>
             <TransactionStatus {...{status}} />
           </View>
-          <Text style={styles.text}>
-            {getRupiah(amount)}
-            <Text style={styles.dot}>.</Text>
-            {getDefaultDate(created_at)}
-          </Text>
+          <View style={gbStyles.rowYCenter}>
+            <Text style={styles.text}>{getRupiah(amount)}</Text>
+            <View style={{marginHorizontal: 2}}>
+              <Dot />
+            </View>
+            <Text style={styles.text}>{getDefaultDate(created_at)}</Text>
+          </View>
         </View>
       </View>
     </TouchableOpacity>
@@ -62,9 +64,6 @@ const styles = StyleSheet.create({
   beneficiaryName: {flex: 1, paddingRight: 10},
   text: {
     ...gbStyles.textStyle(14),
-    lineHeight: 22,
-  },
-  dot: {
-    ...gbStyles.textStyle(30, 'black', 'bold'),
+    textAlignVertical: 'center',
   },
 });
