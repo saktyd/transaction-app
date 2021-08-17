@@ -13,6 +13,7 @@ const transcationsReducer = (state = initialState, action) => {
         ...state,
         isLoadingTransactions: true,
         errorTransactions: false,
+        transactions: [],
       };
     }
 

@@ -29,7 +29,7 @@ export default () => {
     [inputValue],
   );
 
-  const list = useMemo(() => {
+  const data = useMemo(() => {
     let filter = [].concat(transactions);
     if (inputValue) {
       // Filter by input / search keyword
@@ -83,11 +83,10 @@ export default () => {
         }}
       />
       <FlatList
-        data={list}
+        {...{data, renderItem}}
         bouncesZoom={false}
         showsVerticalScrollIndicator={false}
         keyExtractor={item => item.id}
-        renderItem={renderItem}
         contentContainerStyle={styles.flatlistContainer(insets.bottom)}
         ItemSeparatorComponent={() => <View style={{height: 5}} />}
         ListEmptyComponent={

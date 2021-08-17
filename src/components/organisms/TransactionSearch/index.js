@@ -40,7 +40,6 @@ export default ({inputValue, setInputValue, pickerValue, setPickerValue}) => {
           defaultValue={inputValue}
           onChangeText={value => setInputValue(value)}
           placeholder="Cari nama, bank, atau nominal"
-          style={styles.input}
         />
         <TouchableOpacity
           style={gbStyle.rowYCenter}
@@ -60,13 +59,6 @@ const styles = StyleSheet.create({
     paddingVertical: 15,
     paddingLeft: 7,
     paddingRight: 15,
-  },
-  input: {
-    fontSize: 14,
-    flex: 1,
-    paddingHorizontal: 5,
-    paddingVertical: 0,
-    color: 'black',
   },
   pickerText: {
     ...gbStyle.textStyle(14, COLORS.primary, 'bold'),

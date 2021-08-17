@@ -1,6 +1,11 @@
 import React from 'react';
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
-import {BankRoute, MainContainer, TranscDetailRow} from '../../components';
+import {
+  BankRoute,
+  MainContainer,
+  PlatformButton,
+  TranscDetailRow,
+} from '../../components';
 import gbStyles from '../../styles';
 import CopyIcon from '../../assets/icon/copy.svg';
 import {COLORS} from '../../constant';
@@ -9,9 +14,17 @@ import {getDefaultDate, getRupiah} from '../../utils';
 export default ({route, navigation}) => {
   const data = route?.params;
 
-  const onPressClose = () => {
+  // back to transaksi list
+  const onPress = () => {
     navigation.goBack();
   };
+
+  const customRipple = {
+    color: COLORS.defaultRipple,
+    borderless: true,
+    radius: 20,
+  };
+
   return (
     <MainContainer style={{paddingTop: 15}}>
       <View style={[styles.card, gbStyles.rowYCenter, {marginBottom: 1}]}>
@@ -22,9 +35,9 @@ export default ({route, navigation}) => {
       </View>
       <View style={[styles.card, gbStyles.rowYCenter, {marginBottom: 2}]}>
         <Text style={[styles.textBold, {flex: 1}]}>DETAIL TRANSAKSI</Text>
-        <TouchableOpacity onPress={onPressClose}>
+        <PlatformButton {...{onPress, customRipple}}>
           <Text style={gbStyles.textStyle(14, COLORS.primary)}>Tutup</Text>
-        </TouchableOpacity>
+        </PlatformButton>
       </View>
       <View style={[styles.card]}>
         <BankRoute {...{...data, size: 18}} />

@@ -3,6 +3,7 @@ export const COLORS = {
   secondary: '#48a970', // green
   backgroud: '#f1f9f6', // blue background color
   placeholder: '#929292', // grey placeholder
+  defaultRipple: '#fc9a88', // light orange
 };
 
 export const TRS_STATUS = {

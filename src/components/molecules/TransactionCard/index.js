@@ -1,62 +1,54 @@
 import React from 'react';
-import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import {View, Text, StyleSheet} from 'react-native';
 import {COLORS, TRS_STATUS} from '../../../constant';
 import gbStyles from '../../../styles';
 import {getDefaultDate, getRupiah} from '../../../utils';
-import {BankRoute, Dot, TransactionStatus} from '../../atoms';
-import {useNavigation} from '@react-navigation/core';
+import {BankRoute, Dot, PlatformButton, TransactionStatus} from '../../atoms';
+import {useNavigation} from '@react-navigation/native';
 
 export default ({item}) => {
   const navigation = useNavigation();
-  const {
-    sender_bank,
-    beneficiary_bank,
-    status,
-    beneficiary_name,
-    amount,
-    created_at,
-  } = item;
+  const {sender_bank, beneficiary_bank, status} = item;
 
   const onPress = () => {
     navigation.navigate('Detail Transaksi', item);
   };
 
   return (
-    <TouchableOpacity style={styles.container(item.status)} {...{onPress}}>
+    <PlatformButton style={styles.container} {...{onPress}}>
+      <View style={styles.borderRightColor(item.status)} />
       <View style={styles.row}>
-        <View style={{flex: 1}}>
-          <BankRoute {...{sender_bank, beneficiary_bank}} />
-          <View style={gbStyles.rowYCenter}>
-            <Text
-              style={[styles.text, styles.beneficiaryName]}
-              numberOfLines={1}>
-              {beneficiary_name.toUpperCase()}
-            </Text>
-            <TransactionStatus {...{status}} />
+        <BankRoute {...{sender_bank, beneficiary_bank}} />
+        <View style={gbStyles.rowYCenter}>
+          <Text style={[styles.text, styles.beneficiaryName]} numberOfLines={1}>
+            {item?.beneficiary_name.toUpperCase()}
+          </Text>
+          <TransactionStatus {...{status}} />
+        </View>
+        <View style={gbStyles.rowYCenter}>
+          <Text style={styles.text}>{getRupiah(item?.amount)}</Text>
+          <View style={{marginHorizontal: 2}}>
+            <Dot />
           </View>
-          <View style={gbStyles.rowYCenter}>
-            <Text style={styles.text}>{getRupiah(amount)}</Text>
-            <View style={{marginHorizontal: 2}}>
-              <Dot />
-            </View>
-            <Text style={styles.text}>{getDefaultDate(created_at)}</Text>
-          </View>
+          <Text style={styles.text}>{getDefaultDate(item?.created_at)}</Text>
         </View>
       </View>
-    </TouchableOpacity>
+    </PlatformButton>
   );
 };
 
 const styles = StyleSheet.create({
-  container: status => ({
+  container: {
     ...gbStyles.cardContainer,
+    flexDirection: 'row',
+  },
+  borderRightColor: status => ({
     backgroundColor:
       status === TRS_STATUS.SUCCESS ? COLORS.secondary : COLORS.primary,
-    paddingLeft: 5,
+    width: 5,
   }),
   row: {
-    ...gbStyles.rowYCenter,
-    backgroundColor: 'white',
+    flex: 1,
     paddingVertical: 14,
     paddingLeft: 14,
     paddingRight: 10,
