@@ -15,7 +15,7 @@ import {COLORS} from '../../constant';
 export default () => {
   const disptach = useDispatch();
   const insets = useSafeAreaInsets();
-  const [inputValue, setInputValue] = useState('');
+  const [keyword, setKeyword] = useState('');
   const [pickerValue, setPickerValue] = useState('URUTKAN');
   const {transactions, isLoadingTransactions} = useSelector(
     ({transc}) => transc,
@@ -24,14 +24,14 @@ export default () => {
   const isKeywordIncluded = useCallback(
     target => {
       target = target.toString();
-      return target.toLowerCase().includes(inputValue.toLowerCase());
+      return target.toLowerCase().includes(keyword.toLowerCase());
     },
-    [inputValue],
+    [keyword],
   );
 
   const data = useMemo(() => {
     let filter = [].concat(transactions);
-    if (inputValue) {
+    if (keyword) {
       // Filter by input / search keyword
       filter = filter.filter(
         item =>
@@ -62,7 +62,7 @@ export default () => {
     } else {
       return filter;
     }
-  }, [transactions, inputValue, pickerValue, isKeywordIncluded]);
+  }, [transactions, keyword, pickerValue, isKeywordIncluded]);
 
   const renderItem = ({item}) => {
     return <TransactionCard {...{item}} />;
@@ -74,14 +74,7 @@ export default () => {
 
   return (
     <MainContainer style={{padding: 7}}>
-      <TransactionSearch
-        {...{
-          inputValue,
-          setInputValue,
-          pickerValue,
-          setPickerValue,
-        }}
-      />
+      <TransactionSearch {...{setKeyword, pickerValue, setPickerValue}} />
       <FlatList
         {...{data, renderItem}}
         bouncesZoom={false}

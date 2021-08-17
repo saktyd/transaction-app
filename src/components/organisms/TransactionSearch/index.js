@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, memo, useEffect} from 'react';
 import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 import {COLORS} from '../../../constant';
 import gbStyle from '../../../styles';
@@ -7,7 +7,7 @@ import ArrowDownIcon from '../../../assets/icon/arrow-down.svg';
 import SearchIcon from '../../../assets/icon/search.svg';
 import {ModalPicker} from '../../molecules';
 
-export default ({inputValue, setInputValue, pickerValue, setPickerValue}) => {
+export default memo(({setKeyword, pickerValue, setPickerValue}) => {
   const optionsList = [
     'URUTKAN',
     'Nama A-Z',
@@ -15,8 +15,8 @@ export default ({inputValue, setInputValue, pickerValue, setPickerValue}) => {
     'Tanggal Terbaru',
     'Tanggal Terlama',
   ];
-
   const [isVisible, setModalVisible] = useState(false);
+  const [inputValue, setInputValue] = useState('');
 
   const onPressPickerItem = item => {
     if (pickerValue !== item.label) {
@@ -28,6 +28,16 @@ export default ({inputValue, setInputValue, pickerValue, setPickerValue}) => {
   const onPressPickerButton = () => {
     setModalVisible(true);
   };
+
+  // Delaying search keyword input when user typing for minimizing parent re-render
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setKeyword(inputValue);
+    }, 300);
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [inputValue, setKeyword]);
 
   return (
     <>
@@ -50,7 +60,7 @@ export default ({inputValue, setInputValue, pickerValue, setPickerValue}) => {
       </View>
     </>
   );
-};
+});
 
 const styles = StyleSheet.create({
   container: {

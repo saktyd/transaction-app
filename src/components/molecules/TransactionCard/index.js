@@ -41,6 +41,7 @@ const styles = StyleSheet.create({
   container: {
     ...gbStyles.cardContainer,
     flexDirection: 'row',
+    overflow: 'hidden',
   },
   borderRightColor: status => ({
     backgroundColor:
